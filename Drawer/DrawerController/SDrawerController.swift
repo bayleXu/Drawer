@@ -46,9 +46,15 @@ class SDrawerController: UIViewController {
         for childViewController in (mainVC?.childViewControllers)! {
             
             addScreenEdgePanGestureRecognizerToView(view: childViewController.view)
-            addSwipeGestureRecognizerToView(view: childViewController.view)
         }
         
+    }
+    
+    // 隐藏导航栏
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     deinit {
@@ -149,17 +155,6 @@ class SDrawerController: UIViewController {
         pan.edges = UIRectEdge.left
         pan.delegate = self
         view.addGestureRecognizer(pan)
-        
-    }
-    
-    //MARK: - 添加屏幕轻扫手势
-    private func addSwipeGestureRecognizerToView(view: UIView) {
-        
-        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(swipeGesture(_:)))
-        swipe.numberOfTouchesRequired = 1
-        swipe.direction = .right
-        swipe.delegate = self
-//        view.addGestureRecognizer(swipe)
     }
     
     //MARK: - 屏幕边缘手势
@@ -187,13 +182,6 @@ class SDrawerController: UIViewController {
             }
             
         }
-        
-    }
-    
-    //MARK: - 屏幕轻扫手势
-    @objc func swipeGesture(_ swipe: UISwipeGestureRecognizer) {
-        
-        openLeftMenu()
         
     }
     
@@ -279,7 +267,6 @@ class SDrawerController: UIViewController {
 
             weakSelf?.coverBtn.removeFromSuperview()
         })
-        
         
     }
     

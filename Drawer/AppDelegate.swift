@@ -32,9 +32,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let leftVC = SLeftController()
         let homeVC = SHomeController()
-        homeNaviVC = UINavigationController.init(rootViewController: homeVC)
+        homeNaviVC = SNaviController.init(rootViewController: homeVC)
         drawVC = SDrawerController.init(mainVC: homeNaviVC!, leftMenuVC: leftVC, leftWidth: kScreenWidth * 4 / 5)
-        window?.rootViewController = drawVC
+        let drawNaviVC = SNaviController.init(rootViewController: drawVC)
+        window?.rootViewController = drawNaviVC
         window?.makeKeyAndVisible()
     }
 
